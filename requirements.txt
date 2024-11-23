@@ -1,0 +1,8 @@
+tensorflow==2.15.0
+grpcio
+grpcio-tools
+protobuf
+pillow
+numpy
+requests
+python-dotenv
