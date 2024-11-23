@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.1-slim
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -16,13 +16,11 @@ RUN pip install grpcio-tools
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Generate gRPC files
-RUN python -m grpc_tools.protoc -I=protos --python_out=src/generated --grpc_python_out=src/generated protos/waste_prediction.proto
+# Generate gRPC files with relative imports
+RUN python -m grpc_tools.protoc -I=protos --python_out=. --grpc_python_out=. protos/waste_prediction.proto
 
-# Set environment variables (if needed)
-ENV MODEL_ARCHIVE_PATH=bahiskaraananda/robin-efficientnetv2s/tensorFlow2/1.0-18m-ft144
-ENV KAGGLE_USERNAME=meganugraha
-ENV KAGGLE_KEY=c2ee120b5792464fdf5468c81c913dd1
+# Run the invoke_model_utils.py script to download and extract the model
+RUN python invoke_model_utils.py
 
 # Run the application
-CMD ["python", "src/grpc_server.py"]
+CMD ["python", "app.py"]
