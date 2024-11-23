@@ -1,6 +1,31 @@
-# Waste Prediction Service
+# Robin protobuf-gRPC Service
 
-This project provides a gRPC-based service for waste prediction using a pre-trained machine learning model. The service can download the model from Kaggle, extract it, and use it to make predictions on waste images.
+A gRPC-based service for our waste prediction model, Robin. The service downloads the model from Kaggle, extracts it, and uses it to make predictions on waste images.
+
+This service is designed to run as a subsidiary for our backend app in Google Cloud Run, enabling a high-performance microservice architecture.
+
+## Project Structure
+
+```plain
+project_root/
+│
+├── protos/
+│   └── waste_prediction.proto
+│
+├── src/
+│   ├── utils/
+│   │   └── model_utils.py
+│   └── grpc_handler.py
+│
+├── .env
+├── config.py
+├── requirements.txt
+├── Dockerfile
+├── .gitignore
+├── app.py
+├── waste_prediction_pb2.py
+└── waste_prediction_pb2_grpc.py
+```
 
 ## Features
 
@@ -16,7 +41,7 @@ This project provides a gRPC-based service for waste prediction using a pre-trai
 - Python 3.10
 - Docker (optional, for containerization)
 
-### Installation
+### Installation on Local Machine (without Docker)
 
 1. Clone the repository:
 
@@ -41,7 +66,13 @@ This project provides a gRPC-based service for waste prediction using a pre-trai
 4. Set up the environment variable in an .env file
 
    ```sh
-   MODEL_ARCHIVE_PATH=your kaggle download url here
+   MODEL_ARCHIVE_PATH=your_kaggle_download_url_here
+   ```
+
+5. Generate gRPC config
+
+   ```sh
+   python -m grpc_tools.protoc -I=protos --python_out=. --grpc_python_out=. protos/waste_prediction.proto
    ```
 
 ### Running the Application
