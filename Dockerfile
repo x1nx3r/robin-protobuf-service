@@ -19,8 +19,5 @@ COPY . .
 # Generate gRPC files with relative imports
 RUN python -m grpc_tools.protoc -I=protos --python_out=. --grpc_python_out=. protos/waste_prediction.proto
 
-# Run the invoke_model_utils.py script to download and extract the model
-RUN python invoke_model_utils.py
-
 # Run the application
 CMD ["python", "app.py"]

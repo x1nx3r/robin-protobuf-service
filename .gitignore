@@ -137,3 +137,6 @@ kaggle.json
 
 # Model dir
 model_dir
+
+# Debugging tools directory
+test
