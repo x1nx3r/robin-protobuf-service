@@ -8,7 +8,6 @@ This project provides a gRPC-based service for waste prediction using a pre-trai
 - **Model Download and Extraction**: Downloads a pre-trained model from Kaggle and extracts it for use.
 - **Docker Support**: Containerizes the application using Docker.
 - **Configuration**: Uses environment variables for configuration.
-- **Unit Tests**: Includes unit tests for the model utility functions.
 
 ## Setup
 
